@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Do_An_CNPM.Models.NGUOIDUNG>
+
+@{
+    ViewBag.Title = "ViewCRUD";
+}
+
+<h2>ViewCRUD</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateCRUD")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaNhanVien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MatKhau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenNguoiDung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChucVu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QueQuan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoDienThoai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_NGUOIDUNG_LOAIVANBAN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_NGUOIDUNG_PHONGBAN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_NGUOIDUNG_QUYENHAN)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaNhanVien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MatKhau)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenNguoiDung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgaySinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChucVu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QueQuan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoDienThoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_NGUOIDUNG_LOAIVANBAN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_NGUOIDUNG_PHONGBAN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_NGUOIDUNG_QUYENHAN)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditCRUD", new { id=item.ID_NGUOIDUNG }) |
+            @Html.ActionLink("Details", "DetailsCRUD", new { id=item.ID_NGUOIDUNG }) |
+            @Html.ActionLink("Delete", "DeleteCRUD", new { id=item.ID_NGUOIDUNG })
+        </td>
+    </tr>
+}
+
+</table>

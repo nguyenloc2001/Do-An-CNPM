@@ -1,0 +1,66 @@
+﻿@model Do_An_CNPM.Models.LOAIVANBAN
+
+@{
+    ViewBag.Title = "DetailsCRUD";
+}
+
+<h2>DetailsCRUD</h2>
+
+<div>
+    <h4>LOAIVANBAN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenLoaiVanBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLoaiVanBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinhVucVanBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinhVucVanBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CapDo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CapDo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_LOAIVANBAN_VANBANDEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_LOAIVANBAN_VANBANDEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_LOAIVANBAN_VANBANDI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_LOAIVANBAN_VANBANDI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_LOAIVANBAN_VANBANNOIBO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_LOAIVANBAN_VANBANNOIBO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditCRUD", new { id = Model.ID_LOAIVANBAN }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

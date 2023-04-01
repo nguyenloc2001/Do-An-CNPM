@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <ul class="navbar-nav flex-grow-1">
+        <li>@Html.ActionLink("Xem Van Ban", "Index", "VanBan", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Xem Nguoi Dung", "Index", "NguoiDung", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Xem PhongBan", "Index", "PhongBan", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Xem Doi Tac", "Index", "DoiTac", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Xem Loai Van Ban", "Index", "LoaiVanBan", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Xem Trang Thai Van Ban", "Index", "TrangThaiVanBan", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Xem Quyen Han", "Index", "QuyenHan", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Tim kiem", "Index", "TimKiem", new { area = "" }, new { @class = "nav-link" })</li>
+
+    </ul>
+</main>

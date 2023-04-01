@@ -1,0 +1,72 @@
+﻿@model Do_An_CNPM.Models.LOAIVANBAN
+
+@{
+    ViewBag.Title = "DeleteCRUD";
+}
+
+<h2>DeleteCRUD</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LOAIVANBAN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenLoaiVanBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLoaiVanBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinhVucVanBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinhVucVanBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CapDo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CapDo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_LOAIVANBAN_VANBANDEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_LOAIVANBAN_VANBANDEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_LOAIVANBAN_VANBANDI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_LOAIVANBAN_VANBANDI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_LOAIVANBAN_VANBANNOIBO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_LOAIVANBAN_VANBANNOIBO)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

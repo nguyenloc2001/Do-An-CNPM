@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="websiteDB" Class="DataWebsiteDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.VANBANNOIBO" Member="VANBANNOIBOs">
+    <Type Name="VANBANNOIBO">
+      <Column Name="ID_VanBanNoiBo" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenVanBanNoiBo" Type="System.String" DbType="NChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="TrichYeuVanBanNoiBo" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="SoHieuGocVanBanNoiBo" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NgayVanBanNoiBo" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NgayBanHanhVanBanNoiBo" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="NoiLuuVanBanNoiBo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SoBanPhatHanhVanBanNoiBo" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NgayDuyetVanBanNoiBo" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NgayLuuSoVanBanNoiBo" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NoiDungVanBanNoiBo" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VanBanLienQuanVanBanNoiBo" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ID_VANBANNOIBO_NGUOIDUNG" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DOITAC" Member="DOITACs">
+    <Type Name="DOITAC">
+      <Column Name="ID_DOITAC" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenDoiTac" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PhanLoai" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_DOITAC_VANBANDEN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_DOITAC_TRANGTHAIVANBAN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_DOITAC_VANBANDI" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LOAIVANBAN" Member="LOAIVANBANs">
+    <Type Name="LOAIVANBAN">
+      <Column Name="ID_LOAIVANBAN" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenLoaiVanBan" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LinhVucVanBan" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CapDo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_LOAIVANBAN_VANBANDEN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_LOAIVANBAN_VANBANDI" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_LOAIVANBAN_VANBANNOIBO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NGUOIDUNG" Member="NGUOIDUNGs">
+    <Type Name="NGUOIDUNG">
+      <Column Name="ID_NGUOIDUNG" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MaNhanVien" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MatKhau" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="TenNguoiDung" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ChucVu" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="QueQuan" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="Mail" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SoDienThoai" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_NGUOIDUNG_LOAIVANBAN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_NGUOIDUNG_PHONGBAN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_NGUOIDUNG_QUYENHAN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PHONGBAN" Member="PHONGBANs">
+    <Type Name="PHONGBAN">
+      <Column Name="ID_PHONGBAN" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenPhongBan" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SoNhanVien" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_PHONGBAN_QUYENHAN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QUYENHAN" Member="QUYENHANs">
+    <Type Name="QUYENHAN">
+      <Column Name="ID_QUYENHAN" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenQuyenHan" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_QUYENHAN_NGUOIDUNG" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TRANGTHAIVANBAN" Member="TRANGTHAIVANBANs">
+    <Type Name="TRANGTHAIVANBAN">
+      <Column Name="ID_TRANGTHAIVANBAN" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenTrangThai" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_TRANGTHAIVANBAN_VANBANDEN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_TRANGTHAIVANBAN_VANBANDI" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_TRANGTHAIVANBAN_VANBANNOIBO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VANBANDEN" Member="VANBANDENs">
+    <Type Name="VANBANDEN">
+      <Column Name="ID_VanBanDen" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenVanBanDen" Type="System.String" DbType="NChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="TrichYeuVanBanDen" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="SoHieuGocVanBanDen" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NgayVanBanDen" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NgayBanHanhVanBanDen" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="NoiLuuVanBanDen" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SoBanPhatHanhVanBanDen" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NgayDuyetVanBanDen" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NgayLuuSoVanBanDen" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NoiDungVanBanDen" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VanBanLienQuanVanBanDen" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ID_VANBANDEN_NGUOIDUNG" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VANBANDI" Member="VANBANDIs">
+    <Type Name="VANBANDI">
+      <Column Name="ID_VanBanDi" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenVanBanDi" Type="System.String" DbType="NChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="TrichYeuVanBanDi" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="SoHieuGocVanBanDi" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NgayVanBanDi" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NgayBanHanhVanBanDi" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="NoiLuuVanBanDi" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SoBanPhatHanhVanBanDi" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NgayDuyetVanBanDi" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NgayLuuSoVanBanDi" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NoiDungVanBanDi" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VanBanLienQuanVanBanDi" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ID_VANBANDI_NGUOIDUNG" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

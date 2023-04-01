@@ -1,0 +1,50 @@
+﻿@model Do_An_CNPM.Models.TRANGTHAIVANBAN
+
+@{
+    ViewBag.Title = "DetailsCRUD";
+}
+
+<h2>DetailsCRUD</h2>
+
+<div>
+    <h4>TRANGTHAIVANBAN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenTrangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenTrangThai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_TRANGTHAIVANBAN_VANBANDEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_TRANGTHAIVANBAN_VANBANDEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_TRANGTHAIVANBAN_VANBANDI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_TRANGTHAIVANBAN_VANBANDI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_TRANGTHAIVANBAN_VANBANNOIBO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_TRANGTHAIVANBAN_VANBANNOIBO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditCRUD", new { id = Model.ID_TRANGTHAIVANBAN }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

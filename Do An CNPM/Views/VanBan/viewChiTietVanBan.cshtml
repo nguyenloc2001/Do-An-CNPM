@@ -1,0 +1,114 @@
+﻿@model Do_An_CNPM.Models.VANBANDEN
+
+@{
+    ViewBag.Title = "viewChiTietVanBan";
+}
+
+<h2>viewChiTietVanBan</h2>
+
+<div>
+    <h4>VANBANDEN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenVanBanDen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenVanBanDen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrichYeuVanBanDen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrichYeuVanBanDen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoHieuGocVanBanDen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoHieuGocVanBanDen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayVanBanDen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayVanBanDen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayBanHanhVanBanDen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayBanHanhVanBanDen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiLuuVanBanDen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiLuuVanBanDen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoBanPhatHanhVanBanDen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoBanPhatHanhVanBanDen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDuyetVanBanDen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDuyetVanBanDen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayLuuSoVanBanDen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayLuuSoVanBanDen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDungVanBanDen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiDungVanBanDen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VanBanLienQuanVanBanDen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VanBanLienQuanVanBanDen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_VANBANDEN_NGUOIDUNG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_VANBANDEN_NGUOIDUNG)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "updateVanBan", new { id = Model.ID_VanBanDen }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

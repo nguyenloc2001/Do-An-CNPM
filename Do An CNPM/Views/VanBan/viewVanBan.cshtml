@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Do_An_CNPM.Models.VANBANDEN>
+
+@{
+    ViewBag.Title = "viewVanBan";
+}
+
+<h2>viewVanBan</h2>
+
+<p>
+    @Html.ActionLink("Create New", "insertVanBan")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenVanBanDen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrichYeuVanBanDen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoHieuGocVanBanDen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayVanBanDen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayBanHanhVanBanDen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiLuuVanBanDen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoBanPhatHanhVanBanDen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDuyetVanBanDen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayLuuSoVanBanDen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiDungVanBanDen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VanBanLienQuanVanBanDen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_VANBANDEN_NGUOIDUNG)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenVanBanDen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrichYeuVanBanDen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoHieuGocVanBanDen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayVanBanDen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayBanHanhVanBanDen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiLuuVanBanDen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoBanPhatHanhVanBanDen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayDuyetVanBanDen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayLuuSoVanBanDen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiDungVanBanDen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VanBanLienQuanVanBanDen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_VANBANDEN_NGUOIDUNG)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "updateVanBan", new { id=item.ID_VanBanDen }) |
+            @Html.ActionLink("Details", "viewChiTietVanBan", new { id=item.ID_VanBanDen }) |
+            @Html.ActionLink("Delete", "deleteVanBan", new { id=item.ID_VanBanDen })
+        </td>
+    </tr>
+}
+
+</table>
