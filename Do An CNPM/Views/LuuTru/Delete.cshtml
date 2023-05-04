@@ -1,0 +1,104 @@
+﻿@model Do_An_CNPM.Models.Model.ModelLuuTru
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LUUTRU</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenLuuTru)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLuuTru)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaLuuTru)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaLuuTru)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianLuu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianLuu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiLuu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiLuu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenKho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenKho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaKho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaKho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenKe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenKe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaKe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaKe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenHop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenHop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaHop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaHop)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

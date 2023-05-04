@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Do_An_CNPM.Models.Model.ModelVanBanDen>
+
+@{
+    ViewBag.Title = "View";
+}
+
+<link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css" />
+<link href="~/Content/css/lib/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/css/lib/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/css/style.css" rel="stylesheet" />
+<link href="~/Content/plugins/search/search-icon.css" />
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <section id="main-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="col-12">
+                                        <div class="card-title">
+                                            <h4>Danh sách văn bản đến</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="col-8 float-right">
+                                        @using (Html.BeginForm("Search","VanBanDen",FormMethod.Post))
+                                        {
+                                            <div class="input-group border rounded-pill p-0">
+                                                <div class="input-group-prepend border-0">
+                                                    <button id="button-addon4" type="button" class="btn btn-link text-info"> <i class="ti-search"> </i> </button>
+                                                </div>
+
+                                                @Html.TextBox("text", "", new { @class = "form-control bg-none border-0" })
+                                                <div class="input-group-prepend border-0">
+                                                    <button id="button-addon4" type="submit" class="btn btn-link text-info">
+                                                        Tìm Kiếm
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr style="background-color:black;" />
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="auto">
+                                                    @Html.DisplayNameFor(model => model.TrichYeu)
+                                                </th>
+                                                <th scope="auto">
+                                                    @Html.DisplayNameFor(model => model.DonViGui)
+                                                </th>
+                                                <th scope="auto">
+                                                    @Html.DisplayNameFor(model => model.TrangThaiVanBanId)
+                                                </th>
+                                                <th scope="col" class="text-center">
+                                                    <button type="button" class="btn btn-success btn-sm p-0">
+                                                        <a class="btn btn-app btn-sm" href="@Url.Action("Create", "VanBanDen")">
+                                                            <i class="ti-plus">&nbsp;Thêm</i>
+                                                        </a>
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td class="text-dark">
+                                                        @Html.DisplayFor(modelItem => item.TrichYeu)
+                                                    </td>
+                                                    <td class="text-dark">
+                                                        @Html.DisplayFor(modelItem => item.DonViGui)
+                                                    </td>
+                                                    <td class="text-dark">
+                                                        @Html.DisplayFor(modelItem => item.TrangThaiVanBanId)
+                                                    </td>
+                                                    <td class="text-center pr-0 pl-0">
+                                                        <button type="button" class="btn btn-sm btn-primary p-0">
+                                                            <a class="btn btn-warning btn-sm" href="@Url.Action("Edit", "VanBanDen", new { id = item.ID })">
+                                                                <i class="ti-pencil-alt">&nbsp;Sửa</i>
+                                                            </a>
+                                                        </button>
+                                                        <button type="button" class="btn btn-sm btn-primary m-l-5 p-0">
+                                                            <a class="btn btn-app btn-sm" href="@Url.Action("Details", "VanBanDen", new { id = item.ID })">
+                                                                <i class="ti-receipt">&nbsp;Chi Tiết</i>
+                                                            </a>
+                                                        </button>
+                                                        <button type="button" class="btn btn-sm btn-primary m-l-5 p-0">
+                                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "VanBanDen", new { id = item.ID })">
+                                                                <i class="ti-trash">&nbsp;Xóa</i>
+                                                            </a>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /# card -->
+                    </div>
+                    <!-- /# column -->
+                </div>
+                <!-- /# row -->
+            </section>
+        </div>
+    </div>
+</div>

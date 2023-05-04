@@ -1,0 +1,147 @@
+﻿@model IEnumerable<Do_An_CNPM.Models.Model.ModelVanBanDen>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaVanBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrichYeu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgaySoan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayBanHanhVanBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiLuuVanBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDuyetVanBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NguoiKyVanBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChucVuNguoiKy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DonViNhan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiDungVanBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VanBanLienQuanVanBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GhiChu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NguoiDungId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CongViecId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiVanBanId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LuuTruId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrangThaiVanBanId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuyenId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoVanBanId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaVanBan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrichYeu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgaySoan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayBanHanhVanBan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiLuuVanBan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayDuyetVanBan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NguoiKyVanBan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChucVuNguoiKy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DonViGui)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiDungVanBan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VanBanLienQuanVanBan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GhiChu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NguoiDungId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CongViecId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiVanBanId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LuuTruId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrangThaiVanBanId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuyenId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoVanBanId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

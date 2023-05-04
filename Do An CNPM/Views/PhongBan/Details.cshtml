@@ -1,0 +1,117 @@
+﻿@model Do_An_CNPM.Models.Model.ModelPhongBan
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@using (Html.BeginForm("Details","PhongBan",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <dl class="dl-horizontal">
+        <div class="content-wrap">
+            <div class="main">
+                <div class="container-fluid">
+                    <section id="main-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-title text-center">
+                                        <h3>Chi tiết phòng ban</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        @*start row 1*@
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-auto pr-0">
+                                                                @Html.DisplayNameFor(model => model.TenPhongBan) &#58;
+                                                            </div>
+                                                            <div class="col-auto pl-1">
+                                                                @Html.DisplayFor(model => model.TenPhongBan)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-auto pr-0">
+                                                                @Html.DisplayNameFor(model => model.MaPhongBan) &#58;
+                                                            </div>
+                                                            <div class="col-auto pl-1">
+                                                                @Html.DisplayFor(model => model.MaPhongBan)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-auto pr-0">
+                                                                @Html.DisplayNameFor(model => model.SoNhanVien) &#58;
+                                                            </div>
+                                                            <div class="col-auto pl-1">
+                                                                @Html.DisplayFor(model => model.SoNhanVien)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*end row 1*@
+
+                                        @*start row 2*@
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-auto pr-0">
+                                                                @Html.DisplayNameFor(model => model.GhiChu) &#58;
+                                                            </div>
+                                                            <div class="col-auto pl-1">
+                                                                @Html.DisplayFor(model => model.GhiChu)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        @*end row 2*@
+
+                                        <div class="form-group text-center">
+                                            <button type="button" class="btn btn-info">
+                                                <a style="color:black;" href="@Url.Action("View", "PhongBan")">
+                                                    <i class="ti-menu-alt">&nbsp;Xem DS</i>
+                                                </a>
+                                            </button>
+                                            <button class="ml-2 btn btn-warning" type="submit" id="edit_ListLVB">
+                                                <a style="color:black;" href="@Url.Action("Edit", "PhongBan")">
+                                                    <i class="ti-pencil-alt" value="Edit">&nbsp;Sửa</i>
+                                                </a>                                                
+                                            </button>
+                                            <button class="ml-2 btn btn-danger" type="submit" id="delete_ListLVB">
+                                                <a style="color:black;" href="@Url.Action("Delete", "PhongBan")">
+                                                    <i class="ti-trash" value="Delete">&nbsp;Xóa</i>
+                                                </a>  
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /# card -->
+                                </div>
+                                <!-- /# column -->
+                            </div>
+                            <!-- /# row -->
+                    </section>
+                </div>
+            </div>
+        </div>
+    </dl>
+}

@@ -1,48 +1,74 @@
-﻿using System;
+﻿using Do_An_CNPM.DAO;
+using Do_An_CNPM.Models.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Do_An_CNPM.Controllers
 {
     public class HomeController : Controller
     {
+        LoginDAO loginDAO = new LoginDAO();
+        ModelNguoiDung nguoiDung = new ModelNguoiDung();
+
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        public ActionResult DangNhap()
+        // GET: Login
+        public ActionResult Login()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult DangNhap(string username, string password)
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string MaNhanVien, string MatKhau)
         {
-            if (username.ToLower() == "admin" && password == "12345")
+            /*string connectString = System.Configuration.ConfigurationManager.ConnectionStrings["websiteDBConnectionString"].ToString();*/
+            if (ModelState.IsValid)
             {
-                Session["user"] = "Admin";
-                return RedirectToAction("Index", "Home");
+                /* using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
+                 {
+                     var obj = (from temp in dbContext.NGUOIDUNGs where (temp.MaNhanVien.Contains(MaNhanVien) && temp.MatKhau.Contains(MatKhau)) select temp).ToList();
+                     if (obj.Count > 0)
+                     {
+                         Session["UserID"] = obj.FirstOrDefault().ID.ToString();
+                         Session["UserName"] = obj.FirstOrDefault().HoVaTen.ToString();
+                         return RedirectToAction("UserDashBoard");
+                     }   
+                 }      */
+                nguoiDung = loginDAO.findData(MaNhanVien, MatKhau);
+                if (nguoiDung.MaNhanVien != null && nguoiDung.MatKhau != null)
+                {
+                    Session["User"] = nguoiDung;  
+                    return RedirectToAction("UserDashBoard");
+                }
+            }
+            ViewBag.Message = "Fail";
+            return View(MaNhanVien, MatKhau);
+        }
+        public ActionResult UserDashBoard()
+        {
+            if (Session["User"] != null)
+            {
+                ViewBag.User = (ModelNguoiDung) Session["User"];
+                return RedirectToAction("Index");
             }
             else
             {
-                return RedirectToAction("DangNhap");
+                return RedirectToAction("Login");
             }
-
         }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();//remove session
+            FormsAuthentication.SignOut();//remove session form authent
+            return RedirectToAction("Login");
+        }
+
     }
 }

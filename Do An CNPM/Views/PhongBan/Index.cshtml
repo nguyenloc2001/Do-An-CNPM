@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Do_An_CNPM.Models.Model.ModelPhongBan>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateCRUD")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenPhongBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaPhongBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoNhanVien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GhiChu)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenPhongBan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaPhongBan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoNhanVien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GhiChu)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditCRUD", new { id=item.ID }) |
+            @Html.ActionLink("Details", "DetailsCRUD", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "DeleteCRUD", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

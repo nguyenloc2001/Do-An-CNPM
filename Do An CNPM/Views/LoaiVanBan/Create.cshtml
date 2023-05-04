@@ -1,0 +1,90 @@
+﻿@model Do_An_CNPM.Models.Model.ModelLoaiVanBan
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("Create", "LoaiVanBan", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="content-wrap">
+            <div class="main">
+                <div class="container-fluid">
+                    <section id="main-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-title">
+                                        <h4>Thêm loại văn bản</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        @*start row 1*@
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.TenLoaiVanBan, htmlAttributes: new { @class = "control-label row-12" })
+                                                        <div class="row-12">
+                                                            @Html.EditorFor(model => model.TenLoaiVanBan, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.TenLoaiVanBan, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.MaLoaiVanBan, htmlAttributes: new { @class = "control-label row-12" })
+                                                        <div class="row-12">
+                                                            @Html.EditorFor(model => model.MaLoaiVanBan, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.MaLoaiVanBan, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        @*end row 1*@
+
+                                        @*start row 2*@
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group ml-3 mr-3">
+                                                    @Html.LabelFor(model => model.GhiChu, htmlAttributes: new { @class = "control-label row-12" })
+                                                    <div class="row-12">
+                                                        @Html.EditorFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*end row 2*@
+
+                                        <div class="form-group text-center">
+                                            <button type="button" class="btn btn-info">
+                                                <a style="color:black;" href="@Url.Action("Index", "LoaiVanBan")">
+                                                    <i class="ti-menu-alt">&nbsp;Xem DS</i>
+                                                </a>
+                                            </button>
+                                            <button class="ml-2 btn btn-info" type="submit" id="save_ListLVB">
+                                                <i class="ti-save">&nbsp;Tạo</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /# card -->
+                                </div>
+                                <!-- /# column -->
+                            </div>
+                            <!-- /# row -->
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

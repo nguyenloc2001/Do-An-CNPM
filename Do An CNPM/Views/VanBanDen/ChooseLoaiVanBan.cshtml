@@ -1,0 +1,4 @@
+﻿@model Do_An_CNPM.Models.Model.ModelLoaiVanBan
+
+    @Html.DropDownListFor(model => model.ID, new SelectList(Model.LoaiVanBanList, "ID", "TenLoaiVanBan", "--Select--"), new {@class="form-control col-12"})
+

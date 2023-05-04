@@ -1,7 +1,14 @@
-﻿using Do_An_CNPM.Models;
+﻿using Do_An_CNPM.Commons;
+using Do_An_CNPM.DAO;
+using Do_An_CNPM.DAO.Interface;
+using Do_An_CNPM.Models;
+using Do_An_CNPM.Models.Model;
+using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,183 +17,104 @@ namespace Do_An_CNPM.Controllers
     public class LoaiVanBanController : Controller
     {
         // GET: LoaiVanBan
-        string connectString = System.Configuration.ConfigurationManager.ConnectionStrings["websiteDBConnectionString"].ToString();
+        LoaiDAO loaiDAO = new LoaiDAO();
+        ModelLoaiVanBan loaiVanBan = null;
+        List<ModelLoaiVanBan> listLoaiVanBan = null;
 
         public ActionResult Index()
         {
-            return RedirectToAction("ViewCRUD");
+            return RedirectToAction("View");
         }
-        public ActionResult ViewCRUD()
+        public ActionResult View()
         {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    var model = (from tempcrud in dbContext.LOAIVANBANs select tempcrud).ToList();
+            
+            listLoaiVanBan = loaiDAO.findAll();
+                        
+            return View(listLoaiVanBan);
+        }
 
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
+        public ActionResult Details(int id)
+        {
+            loaiVanBan = loaiDAO.findById(id);
+            return View(loaiVanBan);
+        }
+
+        public ActionResult Create()
+        {
+            return View(new ModelLoaiVanBan());
+        }
+
+        [HttpPost]
+        public ActionResult Create(ModelLoaiVanBan temp)
+        {
+            if (loaiDAO.check(temp))
             {
-                Console.WriteLine(ex.Message);
-                //ModelState.AddModelError("",ex.Message);
-                return View();
+                ModelState.AddModelError("MaLoaiVanBan", "Mã loại văn bản đã tồn tại");
             }
+            if (!ModelState.IsValid)
+            {
+                return View(temp);
+            }
+            else
+            {
+                loaiDAO.insert(temp);
+                return RedirectToAction("View");
+            }
+        }
+        public ActionResult Edit(int id)
+        {
+            loaiVanBan = loaiDAO.findById(id);
+            return View(loaiVanBan);
         }
         [HttpPost]
-        public ActionResult ViewCRUD1()
+        public ActionResult Edit(ModelLoaiVanBan temp, int id)
         {
-            try
+            if (loaiDAO.check(temp))
             {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    var model = (from tempcrud in dbContext.LOAIVANBANs select tempcrud).ToList();
-
-                    return View(model);
-                }
+                ModelState.AddModelError("MaLoaiVanBan", "Mã loại văn bản trùng với mã loại văn bản khác");
             }
-            catch (Exception ex)
+            if (!ModelState.IsValid)
             {
-                ViewBag.check = ex.Message;
-                return View();
+                return View(temp);
+            }
+            else
+            {
+                loaiDAO.update(temp, id);
+                loaiVanBan = loaiDAO.findById(id);
+                return View(loaiVanBan);
             }
         }
-        public ActionResult DetailsCRUD(string id)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    var model = dbContext.LOAIVANBANs.SingleOrDefault(x => x.ID_LOAIVANBAN == temp);
-
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
+            loaiVanBan = loaiDAO.findById(id);
+            return View(loaiVanBan);
         }
-        /*[HttpPost]
-        public ActionResult DetailsApi()
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    var model = (from tempcrud in dbContext.LOAIVANBANs select tempcrud).ToList();
 
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }*/
-        public ActionResult CreateCRUD()
+        [HttpPost]
+        public ActionResult Delete(ModelLoaiVanBan temp, int id)
         {
+            loaiDAO.delete(id);
+            return RedirectToAction("View");
+        }
+        public ActionResult Search(string text)
+        {
+            loaiDAO.findByCode(text);
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateCRUD(LOAIVANBAN tempCRUD)
+        public ActionResult SearchText(string text)
         {
-            try
-            {
-                if (string.IsNullOrEmpty(tempCRUD.TenLoaiVanBan))
-                {
-                    ModelState.AddModelError("", "Thieu thong tin");
-                    return View(tempCRUD);
-                }
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    dbContext.LOAIVANBANs.InsertOnSubmit(tempCRUD);
-                    dbContext.SubmitChanges();
-                    return View(tempCRUD);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }
-        public ActionResult EditCRUD(string id)
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    var model = dbContext.LOAIVANBANs.SingleOrDefault(x => x.ID_LOAIVANBAN == temp);
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }
-        [HttpPost]
-        public ActionResult EditCRUD(LOAIVANBAN user, string id)
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    var model = dbContext.LOAIVANBANs.SingleOrDefault(x => x.ID_LOAIVANBAN == temp);
-                    model.TenLoaiVanBan = user.TenLoaiVanBan;
-                    model.LinhVucVanBan= user.LinhVucVanBan;
-                    model.CapDo = user.CapDo;
-                    model.ID_LOAIVANBAN_VANBANDEN = user.ID_LOAIVANBAN_VANBANDEN;
-                    model.ID_LOAIVANBAN_VANBANDI = user.ID_LOAIVANBAN_VANBANDI;
-                    model.ID_LOAIVANBAN_VANBANNOIBO = user.ID_LOAIVANBAN_VANBANNOIBO;
-                    dbContext.SubmitChanges();
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
+            listLoaiVanBan = loaiDAO.findByCode(text);
+            return View(listLoaiVanBan);
         }
 
-        public ActionResult DeleteCRUD(string id)
+        public JsonResult CheckMa(string code)
         {
-            using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-            {
-                int temp = Convert.ToInt32(id);
-                var model = dbContext.LOAIVANBANs.SingleOrDefault(x => x.ID_LOAIVANBAN == temp);
-                return View(model);
-            }
+            if (loaiDAO.check(code) == true)
+                return Json(false, JsonRequestBehavior.AllowGet);
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
-        [HttpPost]
-        public ActionResult DeleteCRUD(LOAIVANBAN user, string id)
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    LOAIVANBAN model = dbContext.LOAIVANBANs.SingleOrDefault(x => x.ID_LOAIVANBAN == temp);
-                    dbContext.LOAIVANBANs.DeleteOnSubmit(model);
-                    dbContext.SubmitChanges();
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }
+
     }
 }

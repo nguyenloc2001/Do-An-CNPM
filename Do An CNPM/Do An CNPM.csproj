@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -34,6 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,7 +45,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -100,9 +112,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -113,32 +122,94 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DoiTacController.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="App_Start\AdminAuthorize.cs" />
+    <Compile Include="Commons\InsertKeyWord.cs" />
+    <Compile Include="Controllers\BaoLoiController.cs" />
+    <Compile Include="Controllers\ChucVuController.cs" />
+    <Compile Include="Controllers\CongViecController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoaiVanBanController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LuuTruController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\PhongBanController.cs" />
     <Compile Include="Controllers\QuyenHanController.cs" />
-    <Compile Include="Controllers\TimKiemController.cs" />
+    <Compile Include="Controllers\SoVanBanController.cs" />
     <Compile Include="Controllers\TrangThaiVanBanController.cs" />
-    <Compile Include="Controllers\VanBanController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\VanBanDenController.cs" />
+    <Compile Include="Controllers\VanBanDiController.cs" />
+    <Compile Include="DAO\CheckChucVuNotExists.cs" />
+    <Compile Include="DAO\ChucVuDAO.cs" />
+    <Compile Include="DAO\CongViecDAO.cs" />
+    <Compile Include="DAO\Interface\IChucVuDAO.cs" />
+    <Compile Include="DAO\Interface\ICongViecDAO.cs" />
+    <Compile Include="DAO\Interface\ILoaiDAO.cs" />
+    <Compile Include="DAO\Interface\ILuuTruDAO.cs" />
+    <Compile Include="DAO\Interface\INguoiDungDAO.cs" />
+    <Compile Include="DAO\Interface\IPhongBanDAO.cs" />
+    <Compile Include="DAO\Interface\IQuyenHanDAO.cs" />
+    <Compile Include="DAO\Interface\ISoVanBanDAO.cs" />
+    <Compile Include="DAO\Interface\ITrangThaiDAO.cs" />
+    <Compile Include="DAO\Interface\IVanBanDenDAO.cs" />
+    <Compile Include="DAO\Interface\IVanBanDiDAO.cs" />
+    <Compile Include="DAO\LoaiDAO.cs" />
+    <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\LuuTruDAO.cs" />
+    <Compile Include="DAO\NguoiDungDAO.cs" />
+    <Compile Include="DAO\PhongBanDAO.cs" />
+    <Compile Include="DAO\QuyenDAO.cs" />
+    <Compile Include="DAO\SoVanBanDAO.cs" />
+    <Compile Include="DAO\TrangThaiDAO.cs" />
+    <Compile Include="DAO\URLVanBanDenDAO.cs" />
+    <Compile Include="DAO\VanBanDenDAO.cs" />
+    <Compile Include="DAO\VanBanDiDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mapper\ChucVuMapper.cs" />
+    <Compile Include="Mapper\CongViecMapper.cs" />
+    <Compile Include="Mapper\LoaiVanBanMapper.cs" />
+    <Compile Include="Mapper\LuuTruMapper.cs" />
+    <Compile Include="Mapper\NguoiDungMapper.cs" />
+    <Compile Include="Mapper\PhongBanMapper.cs" />
+    <Compile Include="Mapper\QuyenHanMapper.cs" />
+    <Compile Include="Mapper\SoVanBanMapper.cs" />
+    <Compile Include="Mapper\TrangThaiVanBanMapper.cs" />
+    <Compile Include="Mapper\VanBanDenMapper.cs" />
+    <Compile Include="Mapper\VanBanDiMapper.cs" />
     <Compile Include="Models\DataWebsite.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataWebsite.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\TimKiem.cs" />
+    <Compile Include="Models\FileModel.cs" />
+    <Compile Include="Models\Model\Interface\IModelCongViec.cs" />
+    <Compile Include="Models\Model\Interface\IModelChucVu.cs" />
+    <Compile Include="Models\Model\Interface\IModelLoaiVanBan.cs" />
+    <Compile Include="Models\Model\Interface\IModelLuuTru.cs" />
+    <Compile Include="Models\Model\Interface\IModelNguoiDung.cs" />
+    <Compile Include="Models\Model\Interface\IModelPhongBan.cs" />
+    <Compile Include="Models\Model\Interface\IModelQuyenHan.cs" />
+    <Compile Include="Models\Model\Interface\IModelSoVanBan.cs" />
+    <Compile Include="Models\Model\Interface\IModelVanBanDen.cs" />
+    <Compile Include="Models\Model\Interface\IModelVanBanDi.cs" />
+    <Compile Include="Models\Model\ModelChucVu.cs" />
+    <Compile Include="Models\Model\ModelCongViec.cs" />
+    <Compile Include="Models\Model\ModelLoaiVanBan.cs" />
+    <Compile Include="Models\Model\ModelLuuTru.cs" />
+    <Compile Include="Models\Model\ModelNguoiDung.cs" />
+    <Compile Include="Models\Model\ModelPhongBan.cs" />
+    <Compile Include="Models\Model\ModelQuyenHan.cs" />
+    <Compile Include="Models\Model\ModelSoVanBan.cs" />
+    <Compile Include="Models\Model\ModelTrangThaiVanBan.cs" />
+    <Compile Include="Models\Model\Interface\IModelTrangThaiVanBan.cs" />
+    <Compile Include="Models\Model\ModelVanBanDen.cs" />
+    <Compile Include="Models\Model\ModelVanBanDi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -337,6 +408,40 @@
     <Content Include="Content\js\lib\weather\jquery.simpleWeather.min.js" />
     <Content Include="Content\js\lib\weather\weather-init.js" />
     <Content Include="Content\js\scripts.js" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\plugins\css\all.css" />
+    <Content Include="Content\plugins\css\all.min.css" />
+    <Content Include="Content\plugins\css\brands.css" />
+    <Content Include="Content\plugins\css\brands.min.css" />
+    <Content Include="Content\plugins\css\regular.css" />
+    <Content Include="Content\plugins\css\regular.min.css" />
+    <Content Include="Content\plugins\css\solid.css" />
+    <Content Include="Content\plugins\css\solid.min.css" />
+    <Content Include="Content\plugins\css\svg-with-js.css" />
+    <Content Include="Content\plugins\css\svg-with-js.min.css" />
+    <Content Include="Content\plugins\css\v4-shims.css" />
+    <Content Include="Content\plugins\css\v4-shims.min.css" />
+    <Content Include="Content\plugins\daterangepicker\daterangepicker.css" />
+    <Content Include="Content\plugins\daterangepicker\daterangepicker.js" />
+    <Content Include="Content\plugins\font-awesome.min.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\all.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\all.min.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\brands.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\brands.min.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\fontawesome.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\fontawesome.min.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\regular.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\regular.min.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\solid.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\solid.min.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\svg-with-js.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\svg-with-js.min.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\v4-shims.css" />
+    <Content Include="Content\plugins\fontawesome-free\css\v4-shims.min.css" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\plugins\search\search-icon.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -346,22 +451,35 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\css\admin\assets\fonts\themify.eot" />
+    <Content Include="Content\css\admin\assets\fonts\themify.ttf" />
+    <Content Include="Content\css\admin\assets\fonts\themify.woff" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\plugins\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Models\DataWebsite.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>DataWebsite.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Content\css\admin\assets\fonts\themify.eot" />
-    <Content Include="Content\css\admin\assets\fonts\themify.ttf" />
-    <Content Include="Content\css\admin\assets\fonts\themify.woff" />
+    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Models\DataWebsite.dbml.layout">
       <DependentUpon>DataWebsite.dbml</DependentUpon>
     </None>
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery-3.6.4.intellisense.js" />
+    <Content Include="Scripts\jquery-3.6.4.js" />
+    <Content Include="Scripts\jquery-3.6.4.min.js" />
+    <Content Include="Scripts\jquery-3.6.4.slim.js" />
+    <Content Include="Scripts\jquery-3.6.4.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -379,49 +497,92 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\VanBan\viewVanBan.cshtml" />
-    <Content Include="Views\VanBan\insertVanBan.cshtml" />
-    <Content Include="Views\VanBan\updateVanBan.cshtml" />
-    <Content Include="Views\VanBan\deleteVanBan.cshtml" />
-    <Content Include="Views\VanBan\viewChiTietVanBan.cshtml" />
-    <Content Include="Views\DoiTac\ViewCRUD.cshtml" />
-    <Content Include="Views\DoiTac\DetailsCRUD.cshtml" />
-    <Content Include="Views\DoiTac\CreateCRUD.cshtml" />
-    <Content Include="Views\DoiTac\EditCRUD.cshtml" />
-    <Content Include="Views\DoiTac\DeleteCRUD.cshtml" />
-    <Content Include="Views\LoaiVanBan\ViewCRUD.cshtml" />
-    <Content Include="Views\LoaiVanBan\DetailsCRUD.cshtml" />
-    <Content Include="Views\LoaiVanBan\CreateCRUD.cshtml" />
-    <Content Include="Views\LoaiVanBan\EditCRUD.cshtml" />
-    <Content Include="Views\LoaiVanBan\DeleteCRUD.cshtml" />
-    <Content Include="Views\PhongBan\ViewCRUD.cshtml" />
-    <Content Include="Views\PhongBan\DetailsCRUD.cshtml" />
-    <Content Include="Views\PhongBan\CreateCRUD.cshtml" />
-    <Content Include="Views\PhongBan\EditCRUD.cshtml" />
-    <Content Include="Views\PhongBan\DeleteCRUD.cshtml" />
-    <Content Include="Views\QuyenHan\ViewCRUD.cshtml" />
-    <Content Include="Views\QuyenHan\DetailsCRUD.cshtml" />
-    <Content Include="Views\QuyenHan\CreateCRUD.cshtml" />
-    <Content Include="Views\QuyenHan\EditCRUD.cshtml" />
-    <Content Include="Views\QuyenHan\DeleteCRUD.cshtml" />
-    <Content Include="Views\TrangThaiVanBan\ViewCRUD.cshtml" />
-    <Content Include="Views\TrangThaiVanBan\DetailsCRUD.cshtml" />
-    <Content Include="Views\TrangThaiVanBan\CreateCRUD.cshtml" />
-    <Content Include="Views\TrangThaiVanBan\EditCRUD.cshtml" />
-    <Content Include="Views\TrangThaiVanBan\DeleteCRUD.cshtml" />
-    <Content Include="Views\NguoiDung\ViewCRUD.cshtml" />
-    <Content Include="Views\NguoiDung\DetailsCRUD.cshtml" />
-    <Content Include="Views\NguoiDung\CreateCRUD.cshtml" />
-    <Content Include="Views\NguoiDung\EditCRUD.cshtml" />
-    <Content Include="Views\NguoiDung\DeleteCRUD.cshtml" />
-    <Content Include="Views\TimKiem\Search.cshtml" />
-    <Content Include="Views\Home\DangNhap.cshtml" />
+    <Content Include="Views\VanBanDen\View.cshtml" />
+    <Content Include="Views\VanBanDen\Details.cshtml" />
+    <Content Include="Views\VanBanDen\Create.cshtml" />
+    <Content Include="Views\VanBanDen\Edit.cshtml" />
+    <Content Include="Views\VanBanDen\Delete.cshtml" />
+    <Content Include="Views\VanBanDen\Index.cshtml" />
+    <Content Include="Views\LuuTru\Index.cshtml" />
+    <Content Include="Views\LuuTru\View.cshtml" />
+    <Content Include="Views\LuuTru\Details.cshtml" />
+    <Content Include="Views\LuuTru\Create.cshtml" />
+    <Content Include="Views\LuuTru\Edit.cshtml" />
+    <Content Include="Views\LuuTru\Delete.cshtml" />
+    <Content Include="Views\NguoiDung\Index.cshtml" />
+    <Content Include="Views\NguoiDung\View.cshtml" />
+    <Content Include="Views\NguoiDung\Details.cshtml" />
+    <Content Include="Views\NguoiDung\Create.cshtml" />
+    <Content Include="Views\NguoiDung\Edit.cshtml" />
+    <Content Include="Views\NguoiDung\Delete.cshtml" />
+    <Content Include="Views\ChucVu\View.cshtml" />
+    <Content Include="Views\ChucVu\Details.cshtml" />
+    <Content Include="Views\ChucVu\Create.cshtml" />
+    <Content Include="Views\ChucVu\Edit.cshtml" />
+    <Content Include="Views\ChucVu\Delete.cshtml" />
+    <Content Include="Views\SoVanBan\Index.cshtml" />
+    <Content Include="Views\SoVanBan\View.cshtml" />
+    <Content Include="Views\SoVanBan\Details.cshtml" />
+    <Content Include="Views\SoVanBan\Create.cshtml" />
+    <Content Include="Views\SoVanBan\Edit.cshtml" />
+    <Content Include="Views\SoVanBan\Delete.cshtml" />
+    <Content Include="Views\PhongBan\Index.cshtml" />
+    <Content Include="Views\PhongBan\View.cshtml" />
+    <Content Include="Views\PhongBan\Details.cshtml" />
+    <Content Include="Views\PhongBan\Create.cshtml" />
+    <Content Include="Views\PhongBan\Edit.cshtml" />
+    <Content Include="Views\PhongBan\Delete.cshtml" />
+    <Content Include="Views\QuyenHan\Index.cshtml" />
+    <Content Include="Views\QuyenHan\View.cshtml" />
+    <Content Include="Views\QuyenHan\Details.cshtml" />
+    <Content Include="Views\QuyenHan\Create.cshtml" />
+    <Content Include="Views\QuyenHan\Edit.cshtml" />
+    <Content Include="Views\QuyenHan\Delete.cshtml" />
+    <Content Include="Views\TrangThaiVanBan\View.cshtml" />
+    <Content Include="Views\TrangThaiVanBan\Details.cshtml" />
+    <Content Include="Views\TrangThaiVanBan\Edit.cshtml" />
+    <Content Include="Views\TrangThaiVanBan\Delete.cshtml" />
+    <Content Include="Views\VanBanDi\Index.cshtml" />
+    <Content Include="Views\VanBanDi\View.cshtml" />
+    <Content Include="Views\VanBanDi\Details.cshtml" />
+    <Content Include="Views\VanBanDi\Create.cshtml" />
+    <Content Include="Views\VanBanDi\Edit.cshtml" />
+    <Content Include="Views\VanBanDi\Delete.cshtml" />
+    <Content Include="Views\ChucVu\Search.cshtml" />
+    <Content Include="Views\LoaiVanBan\View.cshtml" />
+    <Content Include="Views\LoaiVanBan\Details.cshtml" />
+    <Content Include="Views\LoaiVanBan\Edit.cshtml" />
+    <Content Include="Views\LoaiVanBan\Delete.cshtml" />
+    <Content Include="Views\LoaiVanBan\Search.cshtml" />
+    <Content Include="Views\LoaiVanBan\Create.cshtml" />
+    <Content Include="Views\CongViec\Index.cshtml" />
+    <Content Include="Views\CongViec\Create.cshtml" />
+    <Content Include="Views\CongViec\Details.cshtml" />
+    <Content Include="Views\CongViec\Edit.cshtml" />
+    <Content Include="Views\CongViec\Delete.cshtml" />
+    <Content Include="Views\TrangThaiVanBan\Create.cshtml" />
+    <Content Include="Views\ChucVu\Index.cshtml" />
+    <Content Include="Views\TrangThaiVanBan\Index.cshtml" />
+    <Content Include="Views\CongViec\View.cshtml" />
+    <Content Include="Views\VanBanDen\ChooseLoaiVanBan.cshtml" />
+    <Content Include="Scripts\jquery-3.6.4.slim.min.map" />
+    <Content Include="Scripts\jquery-3.6.4.min.map" />
+    <Content Include="Views\VanBanDen\test.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\BaoLoi\Index.cshtml" />
+    <Content Include="Views\Upload\UploadFiles.cshtml" />
+    <Content Include="Views\ChucVu\GetPaging.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Service\" />
+    <Folder Include="UploadedFiles\" />
+    <Folder Include="Views\UploadController\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -447,8 +608,6 @@
     <Content Include="Scripts\bootstrap.esm.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -481,11 +640,12 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

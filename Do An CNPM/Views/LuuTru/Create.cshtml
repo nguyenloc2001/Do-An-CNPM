@@ -1,0 +1,184 @@
+﻿@model Do_An_CNPM.Models.Model.ModelLuuTru
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "LuuTru", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card nestable-cart">
+                <div class="card-title">
+                    <h4>Them Luu Tru</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TenLuuTru, htmlAttributes: new { @class = "control-label row-12" })
+                                        <div class="row-12">
+                                            @Html.EditorFor(model => model.TenLuuTru, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TenLuuTru, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.MaLuuTru, htmlAttributes: new { @class = "control-label row-12" })
+                                        <div class="row-12">
+                                            @Html.EditorFor(model => model.MaLuuTru, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.MaLuuTru, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ThoiGianLuu, htmlAttributes: new { @class = "control-label row-12" })
+                                        <div class="row-12">
+                                            @Html.EditorFor(model => model.ThoiGianLuu, new { htmlAttributes = new { @class = "form-control", @style = "number" } })
+                                            @Html.ValidationMessageFor(model => model.ThoiGianLuu, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.NoiLuu, htmlAttributes: new { @class = "control-label row-12" })
+                                        <div class="row-12">
+                                            @*@Html.EditorFor(model => model.NoiLuu, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.NoiLuu, "", new { @class = "text-danger" })*@
+                                            @*<select class="form-select" id="KLT" onchange="KHTChanged(this)">
+                                                    <option value='Off' selected>Offline</option>
+                                                    <option value='On'>Online</option>
+                                                    <option value='Both'>Offline va Online</option>
+                                                </select>*@
+                                            @*<select class="form-select" name="KLT" id="KLT" onchange="KHTChanged(this)">
+                                                    @{
+                                                        Dictionary<string, string> listsKL = ViewBag.listKL;
+                                                        foreach (var temp in listsKL)
+                                                        {
+                                                            <option value="@temp.Key">@temp.Value</option>
+                                                        }
+                                                    }
+                                                </select>*@
+                                            @Html.DropDownListFor(model => model.NoiLuu, new SelectList(ViewBag.listKL, "Key", "Value", "--Select--"), new { @onchange = "KHTChanged(this)", @class="form-select"})
+                                            @Html.ValidationMessageFor(model => model.NoiLuu, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="CKLT">
+                        <div class="col-2">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TenKho, htmlAttributes: new { @class = "control-label row-12" })
+                                    <div class="row-12">
+                                        @Html.EditorFor(model => model.TenKho, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TenKho, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.MaKho, htmlAttributes: new { @class = "control-label row-12" })
+                                    <div class="row-12">
+                                        @Html.EditorFor(model => model.MaKho, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.MaKho, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TenKe, htmlAttributes: new { @class = "control-label row-12" })
+                                    <div class="row-12">
+                                        @Html.EditorFor(model => model.TenKe, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TenKe, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.MaKe, htmlAttributes: new { @class = "control-label row-12" })
+                                    <div class="row-12">
+                                        @Html.EditorFor(model => model.MaKe, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.MaKe, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TenHop, htmlAttributes: new { @class = "control-label row-12" })
+                                    <div class="row-12">
+                                        @Html.EditorFor(model => model.TenHop, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TenHop, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.MaHop, htmlAttributes: new { @class = "control-label row-12" })
+                                    <div class="row-12">
+                                        @Html.EditorFor(model => model.MaHop, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.MaHop, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 row-12">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script language="javascript">
+    function KHTChanged(obj) {
+        var value = obj.value;
+        if (value === 'Online') {
+            document.getElementById("CKLT").style.display = 'none';
+        }
+        else if (value === 'Offline' || value === 'Offline va Online') {
+            document.getElementById("CKLT").style.display = '';
+        }
+    }
+
+</script>

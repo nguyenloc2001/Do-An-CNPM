@@ -30,6 +30,8 @@
     <link href="~/Content/css/lib/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/css/lib/helper.css" rel="stylesheet" />
     <link href="~/Content/css/style.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 
 <body>
@@ -39,89 +41,58 @@
             <div class="nano-content">
                 <ul>
                     <div class="logo">
-                        <a href="index.html">
-                            <!-- <img src="images/logo.png" alt="" /> --><span>He thong quan ly<br /> van ban</span>
+                        <a href="@Url.Action("Index", "Home")">
+                            <span>Quản lý văn bản</span>
                         </a>
                     </div>
-                    <li class="label">Admin</li>
                     <li>
                         <a class="sidebar-sub-toggle">
-                            <i class="ti-home"></i> Quan ly @*<span class="badge badge-primary">2</span>*@ <span class="sidebar-collapse-icon ti-angle-down"></span>
+                            <i class="ti-home"></i>Quản trị hệ thống <span class="sidebar-collapse-icon ti-angle-down"></span>
                         </a>
                         <ul>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
+                            <li><a href="@Url.Action("View", "QuyenHan")">Quyền hạn</a></li>
+                            <li><a href="@Url.Action("View", "ChucVu")">Chức vụ</a></li>
+                            <li><a href="@Url.Action("View", "PhongBan")">Phòng ban</a></li>
+                            <li><a href="@Url.Action("View", "NguoiDung")">Người dùng</a></li>
+                            <li><a href="@Url.Action("View", "LoaiVanBan")">Loại văn bản</a></li>
+                            <li><a href="@Url.Action("View", "TrangThaiVanBan")">Trạng thái văn bản</a></li>
                         </ul>
                     </li>
 
-                    <li class="label">van ban den</li>
                     <li>
                         <a class="sidebar-sub-toggle">
-                            <i class="ti-bar-chart-alt"></i> Something <span class="sidebar-collapse-icon ti-angle-down"></span>
+                            <i class="ti-bar-chart-alt"></i>Văn bản đến<span class="sidebar-collapse-icon ti-angle-down"></span>
                         </a>
                         <ul>
-                            <li>@Html.ActionLink("Xem Van Ban", "Index", "VanBan", new { area = "" }, new { @class = "nav-link" })</li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Something</a></li>
-                    <li><a href="#">Something</a></li>
-                    <li><a href="#">Something</a></li>
-                    <li><a href="#">Something</a></li>
-                    <li><a href="#">Something</a></li>
-                    <li class="label">Van ban di</li>
-                    <li>
-                        <a class="sidebar-sub-toggle">
-                            <i class="ti-layout"></i> sonething <span class="sidebar-collapse-icon ti-angle-down"></span>
-                        </a>
-                        <ul>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-
+                            <li><a href="@Url.Action("View", "VanBanDen")">Xem văn bản đến</a></li>
+                            <li><a href="#">Văn bản trả lại</a></li>
+                            <li><a href="#">Sổ văn bản đến</a></li>
+                            <li><a href="#">Văn bản chờ phê duyệt</a></li>
+                            <li><a href="#">Theo dõi xử lý văn bản</a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="sidebar-sub-toggle">
-                            <i class="ti-panel"></i> Something <span class="sidebar-collapse-icon ti-angle-down"></span>
+                            <i class="ti-bar-chart-alt"></i>Văn bản đi<span class="sidebar-collapse-icon ti-angle-down"></span>
                         </a>
                         <ul>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
+                            <li><a href="@Url.Action("View", "VanBanDi")">Xem văn bản đi</a></li>
+                            <li><a href="#">Sổ văn bản đi</a></li>
+                            <li><a href="#">Đăng ký văn bản đi</a></li>
+                            <li><a href="#">Văn bản chờ phê duyệt</a></li>
+                            <li><a href="#">Đã duyệt</a></li>
+                            <li><a href="#">Văn bản trả lại</a></li>
+                            <li><a href="#">Theo dõi xử lý văn bản</a></li>
                         </ul>
                     </li>
-                    <li class="label">Van ban noi bo</li>
-                    <li><a href="form-basic.html"><i class="ti-view-list-alt"></i> Some thing </a></li>
-                    <li class="label">Extra</li>
-                    <li>
-                        <a class="sidebar-sub-toggle">
-                            <i class="ti-files"></i> Something <span class="sidebar-collapse-icon ti-angle-down"></span>
-                        </a>
-                        <ul>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Something</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Something</a></li>
-                    <li><a href="#">Something</a></li>
-                    <li><a><i class="ti-close"></i> Logout</a></li>
+                    <li><a href="#"><i class="ti-email"></i>Văn bản nội bộ</a></li>
+                    <li><a href="@Url.Action("View", "CongViec")"><i class="ti-user"></i> Công việc</a></li>
+                    <li><a href="@Url.Action("View", "SoVanBan")"><i class="ti-layout-grid2-alt"></i> Sổ văn bản</a></li>
+                    <li><a href="@Url.Action("View", "LuuTru")"><i class="ti-layout-grid2-alt"></i> Lưu trữ</a></li>
+                    @*<li><a href="@Url.Action("View", "DoiTac")"><i class="ti-layout-grid2-alt"></i> Đối tác</a></li>*@
+                    
+                    <li><a href="#"><i class="ti-file"></i> Documentation</a></li>
+                    <li><a href="@Url.Action("Logout", "Login")"><i class="ti-close"></i> Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -310,7 +281,10 @@
                         <div class="dropdown dib">
                             <div class="header-icon" data-toggle="dropdown">
                                 <span class="user-avatar">
-                                    John
+                                    @{
+                                        var user = Session["User"] as Do_An_CNPM.Models.Model.ModelNguoiDung;
+                                    }
+                                    @*@user.HoVaTen*@
                                     <i class="ti-angle-down f-s-10"></i>
                                 </span>
                                 <div class="drop-down dropdown-profile dropdown-menu dropdown-menu-right">
@@ -347,7 +321,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <a href="@Url.Action("Logout", "Login")">
                                                     <i class="ti-power-off"></i>
                                                     <span>Logout</span>
                                                 </a>
@@ -389,10 +363,8 @@
                     <!-- /# column -->
                 </div>
                 <!-- /# row -->
-                <section id="main-content">
-                    <div class="row">
+                <section id="main-content">               
                         @RenderBody()
-                    </div>
                 </section>
                 <div class="row">
                     <div class="col-lg-12">
@@ -414,7 +386,7 @@
 
     <script src="~/Content/js/lib/bootstrap.min.js"></script>
     <script src="~/Content/js/scripts.js"></script>
-    <!-- bootstrap -->
+     bootstrap 
 
     <script src="~/Content/js/lib/calendar-2/moment.latest.min.js"></script>
     <script src="~/Content/js/lib/calendar-2/pignose.calendar.min.js"></script>
@@ -432,6 +404,9 @@
     <script src="~/Content/js/lib/owl-carousel/owl.carousel-init.js"></script>
     <!-- scripit init-->
     <script src="~/Content/js/dashboard2.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>

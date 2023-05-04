@@ -1,0 +1,128 @@
+﻿@model Do_An_CNPM.Models.Model.ModelLuuTru
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>LUUTRU</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenLuuTru, htmlAttributes: new { @class = "control-label row-12" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenLuuTru, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenLuuTru, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MaLuuTru, htmlAttributes: new { @class = "control-label row-12" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MaLuuTru, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MaLuuTru, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ThoiGianLuu, htmlAttributes: new { @class = "control-label row-12" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ThoiGianLuu, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ThoiGianLuu, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NoiLuu, htmlAttributes: new { @class = "control-label row-12" })
+        <div class="col-md-10">
+            <select class="form-select" id="KLT" onchange="KHTChanged(this)">
+                @{
+                    Dictionary<string, string> listsKL = ViewBag.listKL;
+                    foreach (var temp in listsKL)
+                    {
+                        <option value="@temp.Key">@temp.Value</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenKho, htmlAttributes: new { @class = "control-label row-12" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenKho, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenKho, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MaKho, htmlAttributes: new { @class = "control-label row-12" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MaKho, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MaKho, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenKe, htmlAttributes: new { @class = "control-label row-12" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenKe, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenKe, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MaKe, htmlAttributes: new { @class = "control-label row-12" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MaKe, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MaKe, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenHop, htmlAttributes: new { @class = "control-label row-12" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenHop, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenHop, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MaHop, htmlAttributes: new { @class = "control-label row-12" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MaHop, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MaHop, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script language="javascript">
+    function KHTChanged(obj) {
+        var value = obj.value;
+        if (value === 'Online') {
+            document.getElementById("CKLT").style.display = 'none';
+        }
+        else if (value === 'Offline' || value === 'Offline va Online') {
+            document.getElementById("CKLT").style.display = '';
+        }
+    }
+
+</script>

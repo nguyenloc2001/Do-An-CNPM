@@ -1,4 +1,8 @@
-﻿using Do_An_CNPM.Models;
+﻿using Do_An_CNPM.Commons;
+using Do_An_CNPM.DAO;
+using Do_An_CNPM.DAO.Interface;
+using Do_An_CNPM.Models;
+using Do_An_CNPM.Models.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,180 +13,95 @@ namespace Do_An_CNPM.Controllers
 {
     public class PhongBanController : Controller
     {
-        string connectString = System.Configuration.ConfigurationManager.ConnectionStrings["websiteDBConnectionString"].ToString();
+        PhongBanDAO phongBanDAO = new PhongBanDAO();
+        ModelPhongBan phongBan = null;
+        List<ModelPhongBan> listPhongBan = null;
 
         public ActionResult Index()
         {
-            return RedirectToAction("ViewCRUD");
+            return RedirectToAction("View");
         }
-        public ActionResult ViewCRUD()
+        public ActionResult View()
         {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    var model = (from tempcrud in dbContext.PHONGBANs select tempcrud).ToList();
+            listPhongBan = phongBanDAO.findAll();
+            return View(listPhongBan);
+        }
 
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
+        public ActionResult Details(int id)
+        {
+            phongBan = phongBanDAO.findById(id);
+            return View(phongBan);
+        }
+
+        public ActionResult Create()
+        {
+            return View(new ModelPhongBan());
+        }
+
+        [HttpPost]
+        public ActionResult Create(ModelPhongBan temp)
+        {
+            if (phongBanDAO.check(temp))
             {
-                Console.WriteLine(ex.Message);
-                //ModelState.AddModelError("",ex.Message);
-                return View();
+                ModelState.AddModelError("MaPhongBan", "Mã phòng ban đã tồn tại");
             }
+            if (!ModelState.IsValid)
+            {
+                return View(temp);
+            }
+            else
+            {
+                phongBanDAO.insert(temp);
+                return RedirectToAction("View");
+            }
+        }
+        public ActionResult Edit(int id)
+        {
+            phongBan = phongBanDAO.findById(id);
+            return View(phongBan);
         }
         [HttpPost]
-        public ActionResult ViewCRUD1()
+        public ActionResult Edit(ModelPhongBan temp, int id)
         {
-            try
+            if (phongBanDAO.check(temp))
             {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    var model = (from tempcrud in dbContext.PHONGBANs select tempcrud).ToList();
+                ModelState.AddModelError("MaPhongBan", "Mã phòng ban trùng với mã phòng ban khác");
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(temp);
+            }
+            else
+            {
+                phongBanDAO.update(temp, id);
+                phongBan = phongBanDAO.findById(id);
+                return View(phongBan);
+            }
 
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
         }
-        public ActionResult DetailsCRUD(string id)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    var model = dbContext.PHONGBANs.SingleOrDefault(x => x.ID_PHONGBAN == temp);
-
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
+            phongBan = phongBanDAO.findById(id);
+            return View(phongBan);
         }
-        /*[HttpPost]
-        public ActionResult DetailsApi()
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    var model = (from tempcrud in dbContext.PHONGBANs select tempcrud).ToList();
 
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }*/
-        public ActionResult CreateCRUD()
+        [HttpPost]
+        public ActionResult Delete(ModelPhongBan temp, int id)
         {
+            phongBanDAO.delete(id);
+            return RedirectToAction("View");
+        }
+        public ActionResult Search(string text)
+        {
+            phongBanDAO.findByCode(text);
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateCRUD(PHONGBAN tempCRUD)
+        public ActionResult SearchText(string text)
         {
-            try
-            {
-                if (string.IsNullOrEmpty(tempCRUD.TenPhongBan))
-                {
-                    ModelState.AddModelError("", "Thieu thong tin");
-                    return View(tempCRUD);
-                }
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    dbContext.PHONGBANs.InsertOnSubmit(tempCRUD);
-                    dbContext.SubmitChanges();
-                    return View(tempCRUD);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }
-        public ActionResult EditCRUD(string id)
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    var model = dbContext.PHONGBANs.SingleOrDefault(x => x.ID_PHONGBAN == temp);
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }
-        [HttpPost]
-        public ActionResult EditCRUD(PHONGBAN user, string id)
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    var model = dbContext.PHONGBANs.SingleOrDefault(x => x.ID_PHONGBAN == temp);
-                    model.TenPhongBan = user.TenPhongBan;
-                    model.SoNhanVien = user.SoNhanVien;
-                    model.ID_PHONGBAN_QUYENHAN = user.ID_PHONGBAN_QUYENHAN;
-                    dbContext.SubmitChanges();
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }
-
-        public ActionResult DeleteCRUD(string id)
-        {
-            using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-            {
-                int temp = Convert.ToInt32(id);
-                var model = dbContext.PHONGBANs.SingleOrDefault(x => x.ID_PHONGBAN == temp);
-                return View(model);
-            }
-        }
-        [HttpPost]
-        public ActionResult DeleteCRUD(PHONGBAN user, string id)
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    PHONGBAN model = dbContext.PHONGBANs.SingleOrDefault(x => x.ID_PHONGBAN == temp);
-                    dbContext.PHONGBANs.DeleteOnSubmit(model);
-                    dbContext.SubmitChanges();
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
+            listPhongBan = phongBanDAO.findByCode(text);
+            return View(listPhongBan);
         }
     }
 }

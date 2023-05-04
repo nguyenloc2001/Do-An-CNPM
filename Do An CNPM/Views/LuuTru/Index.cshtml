@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Do_An_CNPM.Models.Model.ModelLuuTru>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateCRUD")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenLuuTru)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaLuuTru)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThoiGianLuu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiLuu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenKho)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaKho)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenKe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaKe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenHop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaHop)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenLuuTru)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaLuuTru)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiGianLuu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiLuu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenKho)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaKho)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenKe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaKe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenHop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaHop)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditCRUD", new { id=item.ID }) |
+            @Html.ActionLink("Details", "DetailsCRUD", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "DeleteCRUD", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

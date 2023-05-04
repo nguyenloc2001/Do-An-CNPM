@@ -1,10 +1,16 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+    ViewBag.Title = "Index";
 }
 
 <main>
     <ul class="navbar-nav flex-grow-1">
-        <li>@Html.ActionLink("Xem Van Ban", "Index", "VanBan", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Xem Van Ban Den", "Index", "VanBanDen", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Xem Van Ban Di", "Index", "VanBanDi", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Xem Chuc Vu", "Index", "ChucVu", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Xem Cong Viec", "Index", "CongViec", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Xem So Van Ban", "Index", "SoVanBan", new { area = "" }, new { @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Xem Luu Tru", "Index", "LuuTru", new { area = "" }, new { @class = "nav-link" })</li>
         <li>@Html.ActionLink("Xem Nguoi Dung", "Index", "NguoiDung", new { area = "" }, new { @class = "nav-link" })</li>
         <li>@Html.ActionLink("Xem PhongBan", "Index", "PhongBan", new { area = "" }, new { @class = "nav-link" })</li>
         <li>@Html.ActionLink("Xem Doi Tac", "Index", "DoiTac", new { area = "" }, new { @class = "nav-link" })</li>
@@ -15,3 +21,4 @@
 
     </ul>
 </main>
+

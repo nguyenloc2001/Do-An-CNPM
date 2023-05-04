@@ -1,4 +1,8 @@
-﻿using Do_An_CNPM.Models;
+﻿using Do_An_CNPM.Commons;
+using Do_An_CNPM.DAO;
+using Do_An_CNPM.DAO.Interface;
+using Do_An_CNPM.Models;
+using Do_An_CNPM.Models.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,179 +14,95 @@ namespace Do_An_CNPM.Controllers
     public class QuyenHanController : Controller
     {
         // GET: QuyenHan
-        string connectString = System.Configuration.ConfigurationManager.ConnectionStrings["websiteDBConnectionString"].ToString();
+        QuyenDAO quyenDAO = new QuyenDAO();
+        ModelQuyenHan quyenHan = null;
+        List<ModelQuyenHan> listQuyenHan = null;
 
         public ActionResult Index()
         {
-            return RedirectToAction("ViewCRUD");
+            return RedirectToAction("View");
         }
-        public ActionResult ViewCRUD()
+        public ActionResult View()
         {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    var model = (from tempcrud in dbContext.QUYENHANs select tempcrud).ToList();
+            listQuyenHan = quyenDAO.findAll();
+            return View(listQuyenHan);
+        }
 
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
+        public ActionResult Details(int id)
+        {
+            quyenHan = quyenDAO.findById(id);
+            return View(quyenHan);
+        }
+
+        public ActionResult Create()
+        {
+            return View(new ModelQuyenHan());
+        }
+
+        [HttpPost]
+        public ActionResult Create(ModelQuyenHan temp)
+        {
+            if (quyenDAO.check(temp))
             {
-                Console.WriteLine(ex.Message);
-                //ModelState.AddModelError("",ex.Message);
-                return View();
+                ModelState.AddModelError("MaQuyen", "Mã quyền đã tồn tại");
             }
+            if (!ModelState.IsValid)
+            {
+                return View(temp);
+            }
+            else
+            {
+                quyenDAO.insert(temp);
+                return RedirectToAction("View");
+            }
+        }
+        public ActionResult Edit(int id)
+        {
+            quyenHan = quyenDAO.findById(id);
+            return View(quyenHan);
         }
         [HttpPost]
-        public ActionResult ViewCRUD1()
+        public ActionResult Edit(ModelQuyenHan temp, int id)
         {
-            try
+            if (quyenDAO.check(temp))
             {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    var model = (from tempcrud in dbContext.QUYENHANs select tempcrud).ToList();
+                ModelState.AddModelError("MaQuyen", "Mã quyền trùng với mã quyền khác");
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(temp);
+            }
+            else
+            {
+                quyenDAO.update(temp, id);
+                quyenHan = quyenDAO.findById(id);
+                return View(quyenHan);
+            }
 
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
         }
-        public ActionResult DetailsCRUD(string id)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    var model = dbContext.QUYENHANs.SingleOrDefault(x => x.ID_QUYENHAN == temp);
-
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
+            quyenHan = quyenDAO.findById(id);
+            return View(quyenHan);
         }
-        /*[HttpPost]
-        public ActionResult DetailsApi()
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    var model = (from tempcrud in dbContext.QUYENHANs select tempcrud).ToList();
 
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }*/
-        public ActionResult CreateCRUD()
+        [HttpPost]
+        public ActionResult Delete(ModelQuyenHan temp, int id)
         {
+            quyenDAO.delete(id);
+            return RedirectToAction("View");
+        }
+        public ActionResult Search(string text)
+        {
+            quyenDAO.findByCode(text);
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateCRUD(QUYENHAN tempCRUD)
+        public ActionResult SearchText(string text)
         {
-            try
-            {
-                if (string.IsNullOrEmpty(tempCRUD.TenQuyenHan))
-                {
-                    ModelState.AddModelError("", "Thieu thong tin");
-                    return View(tempCRUD);
-                }
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    dbContext.QUYENHANs.InsertOnSubmit(tempCRUD);
-                    dbContext.SubmitChanges();
-                    return View(tempCRUD);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }
-        public ActionResult EditCRUD(string id)
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    var model = dbContext.QUYENHANs.SingleOrDefault(x => x.ID_QUYENHAN == temp);
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }
-        [HttpPost]
-        public ActionResult EditCRUD(QUYENHAN user, string id)
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    var model = dbContext.QUYENHANs.SingleOrDefault(x => x.ID_QUYENHAN == temp);
-                    model.TenQuyenHan = user.TenQuyenHan;
-                    model.ID_QUYENHAN_NGUOIDUNG = user.ID_QUYENHAN_NGUOIDUNG;
-                    dbContext.SubmitChanges();
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }
-
-        public ActionResult DeleteCRUD(string id)
-        {
-            using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-            {
-                int temp = Convert.ToInt32(id);
-                var model = dbContext.QUYENHANs.SingleOrDefault(x => x.ID_QUYENHAN == temp);
-                return View(model);
-            }
-        }
-        [HttpPost]
-        public ActionResult DeleteCRUD(QUYENHAN user, string id)
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    QUYENHAN model = dbContext.QUYENHANs.SingleOrDefault(x => x.ID_QUYENHAN == temp);
-                    dbContext.QUYENHANs.DeleteOnSubmit(model);
-                    dbContext.SubmitChanges();
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
+            listQuyenHan = quyenDAO.findByCode(text);
+            return View(listQuyenHan);
         }
     }
 }

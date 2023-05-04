@@ -1,8 +1,7 @@
-﻿using Do_An_CNPM.Models;
-using System;
+﻿using Do_An_CNPM.DAO;
+using Do_An_CNPM.DAO.Interface;
+using Do_An_CNPM.Models.Model;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Do_An_CNPM.Controllers
@@ -10,181 +9,148 @@ namespace Do_An_CNPM.Controllers
     public class TrangThaiVanBanController : Controller
     {
         // GET: TrangThaiVanBan
-        string connectString = System.Configuration.ConfigurationManager.ConnectionStrings["websiteDBConnectionString"].ToString();
+        TrangThaiDAO trangThaiDAO = new TrangThaiDAO();
+        ModelTrangThaiVanBan trangThai = null;
+        List<ModelTrangThaiVanBan> listTrangThai = null;
 
         public ActionResult Index()
         {
-            return RedirectToAction("ViewCRUD");
+            return RedirectToAction("View");
         }
-        public ActionResult ViewCRUD()
+        public ActionResult View()
         {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    var model = (from tempcrud in dbContext.TRANGTHAIVANBANs select tempcrud).ToList();
+            listTrangThai = trangThaiDAO.findAll();
+            return View(listTrangThai);
+        }
 
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
+        public ActionResult Details(int id)
+        {
+            trangThai = trangThaiDAO.findById(id);
+            return View(trangThai);
+        }
+
+        public ActionResult Create()
+        {
+            return View(new ModelTrangThaiVanBan());
+        }
+
+        [HttpPost]
+        public ActionResult Create(ModelTrangThaiVanBan temp)
+        {
+            if (trangThaiDAO.check(temp))
             {
-                Console.WriteLine(ex.Message);
-                //ModelState.AddModelError("",ex.Message);
-                return View();
+                ModelState.AddModelError("MaTrangThai", "Mã trạng thái đã tồn tại");
             }
+            if (!ModelState.IsValid)
+            {
+                return View(temp);
+            }
+            else
+            {
+                trangThaiDAO.insert(temp);
+                return RedirectToAction("View");
+            }
+        }
+        public ActionResult Edit(int id)
+        {
+            trangThai = trangThaiDAO.findById(id);
+            return View(trangThai);
         }
         [HttpPost]
-        public ActionResult ViewCRUD1()
+        public ActionResult Edit(ModelTrangThaiVanBan temp, int id)
         {
-            try
+            if (trangThaiDAO.check(temp))
             {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    var model = (from tempcrud in dbContext.TRANGTHAIVANBANs select tempcrud).ToList();
-
-                    return View(model);
-                }
+                ModelState.AddModelError("MaTrangThai", "Mã trạng thái trùng với mã trạng thái khác");
             }
-            catch (Exception ex)
+            if (!ModelState.IsValid)
             {
-                ViewBag.check = ex.Message;
-                return View();
+                return View(temp);
+            }
+            else
+            {
+                trangThaiDAO.update(temp, id);
+                trangThai = trangThaiDAO.findById(id);
+                return View(trangThai);
             }
         }
-        public ActionResult DetailsCRUD(string id)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    var model = dbContext.TRANGTHAIVANBANs.SingleOrDefault(x => x.ID_TRANGTHAIVANBAN == temp);
-
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
+            trangThai = trangThaiDAO.findById(id);
+            return View(trangThai);
         }
-        /*[HttpPost]
-        public ActionResult DetailsApi()
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    var model = (from tempcrud in dbContext.TRANGTHAIVANBANs select tempcrud).ToList();
 
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }*/
-        public ActionResult CreateCRUD()
+        [HttpPost]
+        public ActionResult Delete(ModelTrangThaiVanBan temp ,int id)
         {
+            trangThaiDAO.delete(id);
+            return RedirectToAction("View");
+        }
+        public ActionResult Search(string text)
+        {
+            trangThaiDAO.findByCode(text);
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateCRUD(TRANGTHAIVANBAN tempCRUD)
+        public ActionResult SearchText(string text)
         {
-            try
-            {
-                if (string.IsNullOrEmpty(tempCRUD.TenTrangThai))
-                {
-                    ModelState.AddModelError("", "Thieu thong tin");
-                    return View(tempCRUD);
-                }
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    dbContext.TRANGTHAIVANBANs.InsertOnSubmit(tempCRUD);
-                    dbContext.SubmitChanges();
-                    return View(tempCRUD);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }
-        public ActionResult EditCRUD(string id)
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    var model = dbContext.TRANGTHAIVANBANs.SingleOrDefault(x => x.ID_TRANGTHAIVANBAN == temp);
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
-        }
-        [HttpPost]
-        public ActionResult EditCRUD(TRANGTHAIVANBAN user, string id)
-        {
-            try
-            {
-                using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-                {
-                    int temp = Convert.ToInt32(id);
-                    var model = dbContext.TRANGTHAIVANBANs.SingleOrDefault(x => x.ID_TRANGTHAIVANBAN == temp);
-                    model.TenTrangThai = user.TenTrangThai;
-                    model.ID_TRANGTHAIVANBAN_VANBANDEN = user.ID_TRANGTHAIVANBAN_VANBANDEN;
-                    model.ID_TRANGTHAIVANBAN_VANBANDI = user.ID_TRANGTHAIVANBAN_VANBANDI;
-                    model.ID_TRANGTHAIVANBAN_VANBANNOIBO = user.ID_TRANGTHAIVANBAN_VANBANNOIBO;
-                    dbContext.SubmitChanges();
-                    return View(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.check = ex.Message;
-                return View();
-            }
+            listTrangThai = trangThaiDAO.findByCode(text);
+            return View(listTrangThai);
         }
 
-        public ActionResult DeleteCRUD(string id)
+        /*public ActionResult Tao()
         {
-            using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
-            {
-                int temp = Convert.ToInt32(id);
-                var model = dbContext.TRANGTHAIVANBANs.SingleOrDefault(x => x.ID_TRANGTHAIVANBAN == temp);
-                return View(model);
-            }
+            return View(new IModelTrangThaiVanBan());
         }
         [HttpPost]
-        public ActionResult DeleteCRUD(TRANGTHAIVANBAN user, string id)
+        public ActionResult Tao(IModelTrangThaiVanBan temp)
         {
+            StringBuilder sb = new StringBuilder();
+
+
+
+            //check model isvalid == true
+            if (!ModelState.IsValid)
+            {
+                return View(temp);
+            }
             try
             {
+                if (string.IsNullOrEmpty(temp.TenTrangThai))
+                {
+                    ModelState.AddModelError("", "Thieu thong tin");
+                    return View(temp);
+                }
                 using (DataWebsiteDataContext dbContext = new DataWebsiteDataContext(connectString))
                 {
-                    int temp = Convert.ToInt32(id);
-                    TRANGTHAIVANBAN model = dbContext.TRANGTHAIVANBANs.SingleOrDefault(x => x.ID_TRANGTHAIVANBAN == temp);
-                    dbContext.TRANGTHAIVANBANs.DeleteOnSubmit(model);
+                    if (!String.IsNullOrEmpty(temp.TenTrangThai))
+                    {
+                        sb.Append(temp.TenTrangThai.ToString());
+                    }
+                    if (!String.IsNullOrEmpty(temp.MaTrangThai))
+                    {
+                        sb.Append(temp.MaTrangThai.ToString());
+                    }
+                    InsertKeyWord insertKeyWord = new InsertKeyWord();
+                    temp.KeyWord = insertKeyWord.RemoveUnicode(sb.ToString());
+                    TRANGTHAIVANBAN temp = new TRANGTHAIVANBAN();
+                    *//*temp.ID = temp.ID;
+                    temp.TenTrangThai = temp.TenTrangThai;
+                    temp.MaTrangThai = temp.MaTrangThai;
+                    temp.GhiChu = temp.GhiChu;
+                    temp.KeyWord = temp.KeyWord;*//*
+                    temp = mapper.rowMapper(temp);
+                    dbContext.TRANGTHAIVANBANs.InsertOnSubmit(temp);
                     dbContext.SubmitChanges();
-                    return RedirectToAction("Index", "Home");
+                    return View(temp);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.check = ex.Message;
-                return View();
+                return base.View();
             }
-        }
+        }*/
     }
 }
